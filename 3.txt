@@ -1,0 +1,57 @@
+#!/bin/bash
+while true
+do
+ echo "----------------------------------------"
+ echo " MENU DRIVEN SHELLSCRIPT"
+ echo "----------------------------------------"
+ echo "1. Display common student names from two files"
+ echo "2. List files whose 2nd character is a digit and search pattern"
+ echo "3. List all files in your account ending with 'seg'"
+ echo "4. Print number of subdirectories in current directory"
+ echo "5. Exit"
+ echo "----------------------------------------"
+ echo -n "Enter your choice: "
+ read choice
+ case $choice in
+ 1)
+     echo "Enter first file name:"
+     read file1
+     echo "Enter second file name:"
+     read file2
+     [cite_start]if [ -f "$file1" ] && [ -f "$file2" ]; then [cite: 53, 54]
+         echo "Common student names:"
+         [cite_start]sort "$file1" "$file2" | uniq -d [cite: 54]
+     else
+         [cite_start]echo "One or both files do not exist!" [cite: 54]
+     [cite_start]fi [cite: 55]
+     ;;
+ 2)
+     echo "Files whose second character is a digit:"
+     [cite_start]ls | grep '^.[0-9]' [cite: 55, 56]
+     echo
+     echo "Displaying lines containing 'like' with 3 lines before and after:"
+     echo "Enter file name to search:"
+     read searchfile
+     [cite_start]if [ -f "$searchfile" ]; then [cite: 56, 57]
+         [cite_start]grep -n -C 3 "like" "$searchfile" [cite: 57]
+     else
+         echo "File does not exist!"
+     fi
+     ;;
+ 3)
+     echo "Files ending with 'seg' in your account:"
+     [cite_start]find ~ -type f -name "*seg" 2>/dev/null [cite: 58]
+     ;;
+ 4)
+     echo "Number of subdirectories in current directory:"
+     find . [cite_start]-maxdepth 1 -type d | wc -l [cite: 59]
+     ;;
+ 5)
+     echo "Exiting program..."
+     [cite_start]exit 0 [cite: 60]
+     ;;
+ *)
+     echo "Invalid choice! Please try again."
+     ;;
+ esac
+done
