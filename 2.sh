@@ -1,4 +1,5 @@
 #!/bin/bash
+
 while true
 do
     echo "---------------------------------------------"
@@ -11,75 +12,79 @@ do
     echo "5) Check file permissions (read/write/both)"
     echo "6) Exit"
     echo "---------------------------------------------"
+
     read -p "Enter your choice: " ch
 
     case "$ch" in
         1)
             read -p "Enter file name to create: " file
-            [cite_start]if [ -e "$file" ]; then [cite: 26, 27]
+            if [ -e "$file" ]; then
                 echo "File '$file' already exists."
             else
-                > [cite_start]"$file" [cite: 28]
+                touch "$file"
                 echo "File '$file' created."
-            [cite_start]fi [cite: 29]
+            fi
             ;;
         2)
             read -p "Enter source file name: " src
-            if [ ! [cite_start]-f "$src" ]; then [cite: 30, 31]
+            if [ ! -f "$src" ]; then
                 echo "Source file '$src' does not exist."
             else
                 read -p "Enter destination file name: " dest
-                [cite_start]cp "$src" "$dest" [cite: 32]
+                cp "$src" "$dest"
                 echo "File copied from '$src' to '$dest'."
-            [cite_start]fi [cite: 33]
+            fi
             ;;
         3)
             read -p "Enter current file name: " old
-            if [ ! [cite_start]-e "$old" ]; then [cite: 34, 35]
+            if [ ! -e "$old" ]; then
                 echo "File '$old' does not exist."
             else
                 read -p "Enter new file name: " new
-                [cite_start]mv "$old" "$new" [cite: 36]
+                mv "$old" "$new"
                 echo "File renamed from '$old' to '$new'."
-            [cite_start]fi [cite: 37]
+            fi
             ;;
         4)
             read -p "Enter file name to delete: " file
-            if [ ! [cite_start]-e "$file" ]; then [cite: 38, 39]
+            if [ ! -e "$file" ]; then
                 echo "File '$file' does not exist."
             else
-                [cite_start]rm "$file" [cite: 40]
+                rm "$file"
                 echo "File '$file' deleted."
-            [cite_start]fi [cite: 41]
+            fi
             ;;
         5)
             read -p "Enter file name to check permissions: " file
-            if [ ! [cite_start]-e "$file" ]; then [cite: 42, 43]
+            if [ ! -e "$file" ]; then
                 echo "File '$file' does not exist."
             else
                 readable="no"
                 writable="no"
-                [cite_start][ -r "$file" ] && readable="yes" [cite: 44]
-                [cite_start][ -w "$file" ] && writable="yes" [cite: 44]
 
-                [cite_start]if [ "$readable" = "yes" ] && [ "$writable" = "yes" ]; then [cite: 44, 45]
+                [ -r "$file" ] && readable="yes"
+                [ -w "$file" ] && writable="yes"
+
+                if [ "$readable" = "yes" ] && [ "$writable" = "yes" ]; then
                     echo "File '$file' has BOTH read and write permissions."
-                [cite_start]elif [ "$readable" = "yes" ]; then [cite: 46]
+                elif [ "$readable" = "yes" ]; then
                     echo "File '$file' has ONLY read permission."
-                [cite_start]elif [ "$writable" = "yes" ]; then [cite: 47]
+                elif [ "$writable" = "yes" ]; then
                     echo "File '$file' has ONLY write permission."
                 else
-                    [cite_start]echo "File '$file' has NEITHER read nor write permission." [cite: 48]
-                [cite_start]fi [cite: 49]
+                    echo "File '$file' has NEITHER read nor write permission."
+                fi
             fi
             ;;
         6)
             echo "Exiting..."
-            [cite_start]exit 0 [cite: 50]
+            exit 0
             ;;
         *)
-            [cite_start]echo "Invalid choice. Please try again." [cite: 51]
+            echo "Invalid choice. Please try again."
             ;;
     esac
+
     echo
 done
+
