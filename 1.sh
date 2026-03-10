@@ -1,4 +1,5 @@
 #!/bin/bash
+
 while true
 do
     echo "---------------------------------------------"
@@ -16,77 +17,79 @@ do
     echo "10) Send a message to all users (wall)"
     echo "11) Exit"
     echo "---------------------------------------------"
+
     read -p "Enter your choice: " ch
 
     case "$ch" in
         1)
             echo "Current date and time:"
-            [cite_start]date [cite: 3]
+            date
             ;;
         2)
             echo "Listing files (long format):"
-            [cite_start]ls -l [cite: 4]
+            ls -l
             ;;
         3)
             echo "Current working directory:"
-            [cite_start]pwd [cite: 5]
+            pwd
             ;;
         4)
             read -p "Enter file name: " file
-            [cite_start]if [ -f "$file" ]; then [cite: 6, 7]
+            if [ -f "$file" ]; then
                 echo "Contents of $file:"
                 cat "$file"
             else
                 echo "File does not exist."
-            [cite_start]fi [cite: 8]
+            fi
             ;;
         5)
             read -p "Enter file name: " file
-            [cite_start]if [ -f "$file" ]; then [cite: 9, 10]
+            if [ -f "$file" ]; then
                 echo "First 10 lines of $file:"
                 head "$file"
             else
                 echo "File does not exist."
-            [cite_start]fi [cite: 11]
+            fi
             ;;
         6)
             read -p "Enter file name: " file
-            [cite_start]if [ -f "$file" ]; then [cite: 12, 13]
+            if [ -f "$file" ]; then
                 echo "Last 10 lines of $file:"
                 tail "$file"
             else
                 echo "File does not exist."
-            [cite_start]fi [cite: 14]
+            fi
             ;;
         7)
             read -p "Enter file name: " file
-            [cite_start]if [ -f "$file" ]; then [cite: 15, 16]
+            if [ -f "$file" ]; then
                 read -p "Enter pattern to search: " pattern
                 echo "Lines containing '$pattern' in $file:"
                 grep "$pattern" "$file"
             else
                 echo "File does not exist."
-            [cite_start]fi [cite: 17]
+            fi
             ;;
         8)
             echo "Users currently logged in:"
-            [cite_start]who [cite: 18]
+            who
             ;;
         9)
             echo "Current processes:"
-            [cite_start]ps [cite: 19]
+            ps
             ;;
         10)
             read -p "Enter message to broadcast: " msg
-            [cite_start]echo "$msg" | wall [cite: 20, 21]
+            echo "$msg" | wall
             ;;
         11)
             echo "Exiting..."
-            [cite_start]exit 0 [cite: 22]
+            exit 0
             ;;
         *)
-            [cite_start]echo "Invalid choice. Please try again." [cite: 23]
+            echo "Invalid choice. Please try again."
             ;;
     esac
+
     echo
 done
