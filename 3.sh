@@ -1,57 +1,95 @@
 #!/bin/bash
+
 while true
 do
- echo "----------------------------------------"
- echo " MENU DRIVEN SHELLSCRIPT"
- echo "----------------------------------------"
- echo "1. Display common student names from two files"
- echo "2. List files whose 2nd character is a digit and search pattern"
- echo "3. List all files in your account ending with 'seg'"
- echo "4. Print number of subdirectories in current directory"
- echo "5. Exit"
- echo "----------------------------------------"
- echo -n "Enter your choice: "
- read choice
- case $choice in
- 1)
-     echo "Enter first file name:"
-     read file1
-     echo "Enter second file name:"
-     read file2
-     [cite_start]if [ -f "$file1" ] && [ -f "$file2" ]; then [cite: 53, 54]
-         echo "Common student names:"
-         [cite_start]sort "$file1" "$file2" | uniq -d [cite: 54]
-     else
-         [cite_start]echo "One or both files do not exist!" [cite: 54]
-     [cite_start]fi [cite: 55]
-     ;;
- 2)
-     echo "Files whose second character is a digit:"
-     [cite_start]ls | grep '^.[0-9]' [cite: 55, 56]
-     echo
-     echo "Displaying lines containing 'like' with 3 lines before and after:"
-     echo "Enter file name to search:"
-     read searchfile
-     [cite_start]if [ -f "$searchfile" ]; then [cite: 56, 57]
-         [cite_start]grep -n -C 3 "like" "$searchfile" [cite: 57]
-     else
-         echo "File does not exist!"
-     fi
-     ;;
- 3)
-     echo "Files ending with 'seg' in your account:"
-     [cite_start]find ~ -type f -name "*seg" 2>/dev/null [cite: 58]
-     ;;
- 4)
-     echo "Number of subdirectories in current directory:"
-     find . [cite_start]-maxdepth 1 -type d | wc -l [cite: 59]
-     ;;
- 5)
-     echo "Exiting program..."
-     [cite_start]exit 0 [cite: 60]
-     ;;
- *)
-     echo "Invalid choice! Please try again."
-     ;;
- esac
+    echo "---------------------------------------------"
+    echo "        UNIX COMMANDS MENU"
+    echo "---------------------------------------------"
+    echo "1) Show current date and time (date)"
+    echo "2) List files in current directory (ls -l)"
+    echo "3) Show current working directory (pwd)"
+    echo "4) Display contents of a file (cat)"
+    echo "5) Show first 10 lines of a file (head)"
+    echo "6) Show last 10 lines of a file (tail)"
+    echo "7) Search for a pattern in a file (grep)"
+    echo "8) Show currently logged in users (who)"
+    echo "9) Show current processes (ps)"
+    echo "10) Send a message to all users (wall)"
+    echo "11) Exit"
+    echo "---------------------------------------------"
+
+    read -p "Enter your choice: " ch
+
+    case "$ch" in
+        1)
+            echo "Current date and time:"
+            date
+            ;;
+        2)
+            echo "Listing files (long format):"
+            ls -l
+            ;;
+        3)
+            echo "Current working directory:"
+            pwd
+            ;;
+        4)
+            read -p "Enter file name: " file
+            if [ -f "$file" ]; then
+                echo "Contents of $file:"
+                cat "$file"
+            else
+                echo "File does not exist."
+            fi
+            ;;
+        5)
+            read -p "Enter file name: " file
+            if [ -f "$file" ]; then
+                echo "First 10 lines of $file:"
+                head "$file"
+            else
+                echo "File does not exist."
+            fi
+            ;;
+        6)
+            read -p "Enter file name: " file
+            if [ -f "$file" ]; then
+                echo "Last 10 lines of $file:"
+                tail "$file"
+            else
+                echo "File does not exist."
+            fi
+            ;;
+        7)
+            read -p "Enter file name: " file
+            if [ -f "$file" ]; then
+                read -p "Enter pattern to search: " pattern
+                echo "Lines containing '$pattern' in $file:"
+                grep "$pattern" "$file"
+            else
+                echo "File does not exist."
+            fi
+            ;;
+        8)
+            echo "Users currently logged in:"
+            who
+            ;;
+        9)
+            echo "Current processes:"
+            ps
+            ;;
+        10)
+            read -p "Enter message to broadcast: " msg
+            echo "$msg" | wall
+            ;;
+        11)
+            echo "Exiting..."
+            exit 0
+            ;;
+        *)
+            echo "Invalid choice. Please try again."
+            ;;
+    esac
+
+    echo "---------------------------------------------"
 done
