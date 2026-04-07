@@ -6,12 +6,12 @@ int main()
 {
     int pid = fork();
 
-    if(pid == 0)   // Child process
+    if(pid == 0)   
     {
-        kill(getppid(), SIGKILL);   // send signal to parent
+        kill(getppid(), SIGKILL);  
         printf("Signal sent to parent\n");
     }
-    else           // Parent process
+    else          
     {
         while(1)
         {
