@@ -11,7 +11,7 @@ int main()
   }
 while(fgets(data,sizeof(data),fp)!=NULL)
 {
-  printf("Output : %s\n",data)
+  printf("Output : %s\n",data);
 }
 pclose(fp);
 return 0;
